@@ -1,24 +1,42 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Navbar } from "@/components/luxora/Navbar";
+import { Hero } from "@/components/luxora/Hero";
+import { BrandValues } from "@/components/luxora/BrandValues";
+import { FeaturedGem } from "@/components/luxora/FeaturedGem";
+import { GemJourney } from "@/components/luxora/GemJourney";
+import { BrandStatement } from "@/components/luxora/BrandStatement";
+import { JournalFeature } from "@/components/luxora/JournalFeature";
+import { Footer } from "@/components/luxora/Footer";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "LUXORA — Rare Gemstones, Ethically Sourced";
+const description =
+  "A digital maison of rare gemstones. Discover sapphires, Paraíba tourmaline and imperial topaz, ethically sourced and masterfully cut.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background text-foreground">
+      <Navbar />
+      <main>
+        <Hero />
+        <BrandValues />
+        <FeaturedGem />
+        <GemJourney />
+        <BrandStatement />
+        <JournalFeature />
+      </main>
+      <Footer />
     </div>
   );
 }
